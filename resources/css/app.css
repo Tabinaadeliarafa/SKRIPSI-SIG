@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+@import 'leaflet/dist/leaflet.css';
+
+/* SIG BKS color tokens */
+@theme {
+  --color-bks-primary: #1a3a5c;
+  --color-bks-accent: #2d6ca8;
+  --color-bks-orange: #c0522a;
+  --color-bks-bg: #eceae5;
+  --color-bks-card: #e2dfd9;
+  --color-bks-sidebar: #162f4a;
+  --color-bks-text: #1a1a18;
+}
+
+@layer base {
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  h1, h2, h3 { letter-spacing: -0.01em; }
+}
+
+/* Print stylesheet for report */
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  nav, footer, .print\:hidden { display: none !important; }
+  table { font-size: 11px; }
+  thead { background: #eee !important; -webkit-print-color-adjust: exact; }
+}
+
+/* Leaflet popup theming */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.leaflet-popup-content { margin: 10px 12px; font-size: 13px; }
+.bks-popup-title { font-weight: 700; color: var(--color-bks-primary); margin-bottom: 4px; }
+.bks-popup-row { display: flex; justify-content: space-between; gap: 12px; }
