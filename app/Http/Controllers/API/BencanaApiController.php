@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Bencana;
 use App\Models\Kecamatan;
+use App\Models\KejadianBencana; // === BARU ===
+use App\Models\JenisBencana;    // === BARU ===
+use Illuminate\Http\Request;    // === BARU ===
+use Illuminate\Http\JsonResponse; // === BARU ===
 use Illuminate\Support\Facades\DB;
 
 class BencanaApiController extends Controller
@@ -31,7 +35,6 @@ class BencanaApiController extends Controller
             ->groupBy('kecamatan.id', 'kecamatan.nama', 'kecamatan.kode_bps', 'kecamatan.latitude', 'kecamatan.longitude')
             ->get();
 
-        // Try to merge with polygon GeoJSON file if available
         $path = public_path('geojson/kecamatan.geojson');
         if (file_exists($path)) {
             $geo = json_decode(file_get_contents($path), true);
@@ -49,7 +52,6 @@ class BencanaApiController extends Controller
             return response()->json($geo);
         }
 
-        // Fallback: point features
         $features = $rows->map(function ($r) {
             $total = $r->banjir + $r->longsor + $r->gempa;
             return [
@@ -69,5 +71,38 @@ class BencanaApiController extends Controller
         });
 
         return response()->json(['type' => 'FeatureCollection', 'features' => $features]);
+    }
+
+    public function ringkasan(): JsonResponse
+    {
+        $data = KejadianBencana::with(['kecamatan', 'jenisBencana'])
+            ->where('tahun', 2025)
+            ->get()
+            ->groupBy('kecamatan.nama_kecamatan')
+            ->map(function ($items, $namaKecamatan) {
+                return [
+                    'kecamatan'     => $namaKecamatan,
+                    'total_desa'    => $items->sum('jumlah_desa_terdampak'),
+                    'jenis_bencana' => $items->map(fn($i) => [
+                        'jenis'  => $i->jenisBencana->nama_jenis,
+                        'jumlah' => $i->jumlah_desa_terdampak,
+                    ])->values(),
+                ];
+            })
+            ->sortByDesc('total_desa')
+            ->values();
+
+        return response()->json([
+            'status' => 'success',
+            'data'   => $data,
+        ]);
+    }
+
+    public function jenisBencana(): JsonResponse
+    {
+        return response()->json([
+            'status' => 'success',
+            'data'   => JenisBencana::all(['id', 'nama_jenis', 'kode_jenis', 'warna_peta']),
+        ]);
     }
 }

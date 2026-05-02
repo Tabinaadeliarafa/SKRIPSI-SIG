@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,26 +9,18 @@ class Kecamatan extends Model
     protected $table = 'kecamatan';
 
     protected $fillable = [
-        'nama', 'kode_bps', 'latitude', 'longitude', 'geojson_path',
+        'nama_kecamatan',
+        'kode_kecamatan',
+        'geom',
     ];
 
-    public function bencana(): HasMany
+    public function kejadianBencana(): HasMany
     {
-        return $this->hasMany(Bencana::class);
+        return $this->hasMany(KejadianBencana::class, 'kecamatan_id');
     }
 
-    public function totalBanjir(): int
+    public function dataTahunan(): HasMany
     {
-        return (int) $this->bencana()->where('jenis_bencana', 'banjir')->sum('jumlah_desa');
-    }
-
-    public function totalLongsor(): int
-    {
-        return (int) $this->bencana()->where('jenis_bencana', 'longsor')->sum('jumlah_desa');
-    }
-
-    public function totalGempa(): int
-    {
-        return (int) $this->bencana()->where('jenis_bencana', 'gempa')->sum('jumlah_desa');
+        return $this->hasMany(DataTahunan::class, 'kecamatan_id');
     }
 }
