@@ -12,12 +12,12 @@ class VisualizationController extends Controller
         $rows = DB::table('kecamatan')
             ->leftJoin('bencana', 'kecamatan.id', '=', 'bencana.kecamatan_id')
             ->select(
-                'kecamatan.nama',
+                'kecamatan.nama_kecamatan as nama',
                 DB::raw("SUM(CASE WHEN jenis_bencana='banjir'  THEN jumlah_desa ELSE 0 END) AS banjir"),
                 DB::raw("SUM(CASE WHEN jenis_bencana='longsor' THEN jumlah_desa ELSE 0 END) AS longsor"),
                 DB::raw("SUM(CASE WHEN jenis_bencana='gempa'   THEN jumlah_desa ELSE 0 END) AS gempa")
             )
-            ->groupBy('kecamatan.id', 'kecamatan.nama')
+            ->groupBy('kecamatan.id', 'kecamatan.nama_kecamatan')
             ->orderByDesc('banjir')
             ->get();
 

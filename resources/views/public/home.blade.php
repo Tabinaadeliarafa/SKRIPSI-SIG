@@ -18,7 +18,7 @@
                 Kabupaten Bekasi. Bersumber dari data resmi BPS dan analisis spasial QGIS.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
-                <a href="{{ route('map') }}" class="bg-bks-accent hover:bg-bks-accent/90 px-5 py-2.5 rounded-md font-medium">Lihat Peta Interaktif</a>
+                <a href="{{ route('map') }}" class="bg-bks-accent hover:bg-bks-accent/90 px-5 py-2.5 rounded-md font-medium">Lihat Peta Leaflet</a>
                 <a href="{{ route('report') }}" class="bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-md font-medium border border-white/20">Unduh Data BPS</a>
             </div>
         </div>

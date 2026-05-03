@@ -13,13 +13,13 @@ class ReportController extends Controller
             ->leftJoin('bencana', 'kecamatan.id', '=', 'bencana.kecamatan_id')
             ->select(
                 'kecamatan.id',
-                'kecamatan.nama',
+                'kecamatan.nama_kecamatan as nama',
                 DB::raw("COALESCE(SUM(CASE WHEN jenis_bencana='banjir'  THEN jumlah_desa ELSE 0 END),0) AS banjir"),
                 DB::raw("COALESCE(SUM(CASE WHEN jenis_bencana='longsor' THEN jumlah_desa ELSE 0 END),0) AS longsor"),
                 DB::raw("COALESCE(SUM(CASE WHEN jenis_bencana='gempa'   THEN jumlah_desa ELSE 0 END),0) AS gempa")
             )
-            ->groupBy('kecamatan.id', 'kecamatan.nama')
-            ->orderBy('kecamatan.nama')
+            ->groupBy('kecamatan.id', 'kecamatan.nama_kecamatan')
+            ->orderBy('kecamatan.nama_kecamatan')
             ->get()
             ->map(function ($r) {
                 $r->total   = $r->banjir + $r->longsor + $r->gempa;
