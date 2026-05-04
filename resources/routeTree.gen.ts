@@ -9,38 +9,154 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VisualisasiRouteImport } from './routes/visualisasi'
+import { Route as PetaRouteImport } from './routes/peta'
+import { Route as LaporanRouteImport } from './routes/laporan'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminVisualisasiRouteImport } from './routes/admin.visualisasi'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminFormRouteImport } from './routes/admin.form'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 
+const VisualisasiRoute = VisualisasiRouteImport.update({
+  id: '/visualisasi',
+  path: '/visualisasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PetaRoute = PetaRouteImport.update({
+  id: '/peta',
+  path: '/peta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaporanRoute = LaporanRouteImport.update({
+  id: '/laporan',
+  path: '/laporan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminVisualisasiRoute = AdminVisualisasiRouteImport.update({
+  id: '/admin/visualisasi',
+  path: '/admin/visualisasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminFormRoute = AdminFormRouteImport.update({
+  id: '/admin/form',
+  path: '/admin/form',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/laporan': typeof LaporanRoute
+  '/peta': typeof PetaRoute
+  '/visualisasi': typeof VisualisasiRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/form': typeof AdminFormRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/laporan': typeof LaporanRoute
+  '/peta': typeof PetaRoute
+  '/visualisasi': typeof VisualisasiRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/form': typeof AdminFormRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/laporan': typeof LaporanRoute
+  '/peta': typeof PetaRoute
+  '/visualisasi': typeof VisualisasiRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/form': typeof AdminFormRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/laporan'
+    | '/peta'
+    | '/visualisasi'
+    | '/admin/dashboard'
+    | '/admin/form'
+    | '/admin/login'
+    | '/admin/visualisasi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/laporan'
+    | '/peta'
+    | '/visualisasi'
+    | '/admin/dashboard'
+    | '/admin/form'
+    | '/admin/login'
+    | '/admin/visualisasi'
+  id:
+    | '__root__'
+    | '/'
+    | '/laporan'
+    | '/peta'
+    | '/visualisasi'
+    | '/admin/dashboard'
+    | '/admin/form'
+    | '/admin/login'
+    | '/admin/visualisasi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LaporanRoute: typeof LaporanRoute
+  PetaRoute: typeof PetaRoute
+  VisualisasiRoute: typeof VisualisasiRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminFormRoute: typeof AdminFormRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminVisualisasiRoute: typeof AdminVisualisasiRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/visualisasi': {
+      id: '/visualisasi'
+      path: '/visualisasi'
+      fullPath: '/visualisasi'
+      preLoaderRoute: typeof VisualisasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/peta': {
+      id: '/peta'
+      path: '/peta'
+      fullPath: '/peta'
+      preLoaderRoute: typeof PetaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laporan': {
+      id: '/laporan'
+      path: '/laporan'
+      fullPath: '/laporan'
+      preLoaderRoute: typeof LaporanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +164,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/visualisasi': {
+      id: '/admin/visualisasi'
+      path: '/admin/visualisasi'
+      fullPath: '/admin/visualisasi'
+      preLoaderRoute: typeof AdminVisualisasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/form': {
+      id: '/admin/form'
+      path: '/admin/form'
+      fullPath: '/admin/form'
+      preLoaderRoute: typeof AdminFormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LaporanRoute: LaporanRoute,
+  PetaRoute: PetaRoute,
+  VisualisasiRoute: VisualisasiRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminFormRoute: AdminFormRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminVisualisasiRoute: AdminVisualisasiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
