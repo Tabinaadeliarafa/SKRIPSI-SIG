@@ -24,7 +24,8 @@ const groups = [
       { to: "/admin/dashboard", label: "Layer QGIS", icon: Layers },
       { to: "/admin/visualisasi", label: "Analisis", icon: Microscope },
     ],
-  }, {
+  },
+  {
     label: "Laporan",
     items: [
       { to: "/admin/visualisasi", label: "Statistik", icon: BarChart3 },

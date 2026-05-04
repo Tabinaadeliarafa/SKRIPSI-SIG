@@ -1,5 +1,5 @@
 @import "tailwindcss" source(none);
-@source "../src";
+@source "../resources";
 @import "tw-animate-css";
 @import "leaflet/dist/leaflet.css";
 
@@ -171,4 +171,12 @@
 .leaflet-popup-content-wrapper {
   border-radius: 12px;
   box-shadow: var(--shadow-elevated);
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }

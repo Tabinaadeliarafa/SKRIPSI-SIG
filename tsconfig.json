@@ -1,28 +1,25 @@
 {
+  "include": ["resources/**/*.ts", "resources/**/*.tsx", "vite.config.js"],
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
     "noEmit": true,
-    "ignoreDeprecations": "6.0",
-    "types": ["react", "react-dom"],
-
-    "baseUrl": ".",
+    "types": ["vite/client"],
     "paths": {
-      "@/*": ["resources/*"]
-    }
-  },
-  "include": ["resources/**/*"],
-  "references": []
+      "@/*": ["./resources/*"]
+    },
+    "ignoreDeprecations": "6.0"
+  }
 }
