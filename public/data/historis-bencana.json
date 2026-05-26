@@ -1,0 +1,957 @@
+{
+  "source": "BPS Kabupaten Bekasi — Desa/Kelurahan terdampak bencana alam",
+  "years": [
+    2019,
+    2020,
+    2021,
+    2024,
+    2025
+  ],
+  "kecamatan": [
+    "Setu",
+    "Serang Baru",
+    "Cikarang Pusat",
+    "Cikarang Selatan",
+    "Cibarusah",
+    "Bojongmangu",
+    "Cikarang Timur",
+    "Kedungwaringin",
+    "Cikarang Utara",
+    "Karangbahagia",
+    "Cibitung",
+    "Cikarang Barat",
+    "Tambun Selatan",
+    "Tambun Utara",
+    "Babelan",
+    "Tarumajaya",
+    "Tambelang",
+    "Sukawangi",
+    "Sukatani",
+    "Sukakarya",
+    "Pebayuran",
+    "Cabangbungin",
+    "Muara Gembong"
+  ],
+  "records": [
+    {
+      "kecamatan": "Setu",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Setu",
+      "tahun": 2020,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Setu",
+      "tahun": 2021,
+      "banjir": 7,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 7
+    },
+    {
+      "kecamatan": "Setu",
+      "tahun": 2024,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Setu",
+      "tahun": 2025,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Serang Baru",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 1
+    },
+    {
+      "kecamatan": "Serang Baru",
+      "tahun": 2020,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Serang Baru",
+      "tahun": 2021,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Serang Baru",
+      "tahun": 2024,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 2
+    },
+    {
+      "kecamatan": "Serang Baru",
+      "tahun": 2025,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Cikarang Pusat",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cikarang Pusat",
+      "tahun": 2020,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Cikarang Pusat",
+      "tahun": 2021,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 6
+    },
+    {
+      "kecamatan": "Cikarang Pusat",
+      "tahun": 2024,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Cikarang Pusat",
+      "tahun": 2025,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Cikarang Selatan",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Cikarang Selatan",
+      "tahun": 2020,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 2,
+      "total": 6
+    },
+    {
+      "kecamatan": "Cikarang Selatan",
+      "tahun": 2021,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 7
+    },
+    {
+      "kecamatan": "Cikarang Selatan",
+      "tahun": 2024,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 5
+    },
+    {
+      "kecamatan": "Cikarang Selatan",
+      "tahun": 2025,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Cibarusah",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cibarusah",
+      "tahun": 2020,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cibarusah",
+      "tahun": 2021,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 2
+    },
+    {
+      "kecamatan": "Cibarusah",
+      "tahun": 2024,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Cibarusah",
+      "tahun": 2025,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 2,
+      "total": 2
+    },
+    {
+      "kecamatan": "Bojongmangu",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Bojongmangu",
+      "tahun": 2020,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 2
+    },
+    {
+      "kecamatan": "Bojongmangu",
+      "tahun": 2021,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Bojongmangu",
+      "tahun": 2024,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 2
+    },
+    {
+      "kecamatan": "Bojongmangu",
+      "tahun": 2025,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 2
+    },
+    {
+      "kecamatan": "Cikarang Timur",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cikarang Timur",
+      "tahun": 2020,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Cikarang Timur",
+      "tahun": 2021,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 2,
+      "total": 8
+    },
+    {
+      "kecamatan": "Cikarang Timur",
+      "tahun": 2024,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Cikarang Timur",
+      "tahun": 2025,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 5
+    },
+    {
+      "kecamatan": "Kedungwaringin",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Kedungwaringin",
+      "tahun": 2020,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Kedungwaringin",
+      "tahun": 2021,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Kedungwaringin",
+      "tahun": 2024,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Kedungwaringin",
+      "tahun": 2025,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Cikarang Utara",
+      "tahun": 2019,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Cikarang Utara",
+      "tahun": 2020,
+      "banjir": 10,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 10
+    },
+    {
+      "kecamatan": "Cikarang Utara",
+      "tahun": 2021,
+      "banjir": 11,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 11
+    },
+    {
+      "kecamatan": "Cikarang Utara",
+      "tahun": 2024,
+      "banjir": 10,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 10
+    },
+    {
+      "kecamatan": "Cikarang Utara",
+      "tahun": 2025,
+      "banjir": 8,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 8
+    },
+    {
+      "kecamatan": "Karangbahagia",
+      "tahun": 2019,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Karangbahagia",
+      "tahun": 2020,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 5
+    },
+    {
+      "kecamatan": "Karangbahagia",
+      "tahun": 2021,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Karangbahagia",
+      "tahun": 2024,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Karangbahagia",
+      "tahun": 2025,
+      "banjir": 8,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 8
+    },
+    {
+      "kecamatan": "Cibitung",
+      "tahun": 2019,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Cibitung",
+      "tahun": 2020,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 5
+    },
+    {
+      "kecamatan": "Cibitung",
+      "tahun": 2021,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Cibitung",
+      "tahun": 2024,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Cibitung",
+      "tahun": 2025,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Cikarang Barat",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cikarang Barat",
+      "tahun": 2020,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Cikarang Barat",
+      "tahun": 2021,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Cikarang Barat",
+      "tahun": 2024,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Cikarang Barat",
+      "tahun": 2025,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Tambun Selatan",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Tambun Selatan",
+      "tahun": 2020,
+      "banjir": 8,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 8
+    },
+    {
+      "kecamatan": "Tambun Selatan",
+      "tahun": 2021,
+      "banjir": 10,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 10
+    },
+    {
+      "kecamatan": "Tambun Selatan",
+      "tahun": 2024,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Tambun Selatan",
+      "tahun": 2025,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Tambun Utara",
+      "tahun": 2019,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Tambun Utara",
+      "tahun": 2020,
+      "banjir": 8,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 8
+    },
+    {
+      "kecamatan": "Tambun Utara",
+      "tahun": 2021,
+      "banjir": 8,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 8
+    },
+    {
+      "kecamatan": "Tambun Utara",
+      "tahun": 2024,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Tambun Utara",
+      "tahun": 2025,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 5
+    },
+    {
+      "kecamatan": "Babelan",
+      "tahun": 2019,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 5
+    },
+    {
+      "kecamatan": "Babelan",
+      "tahun": 2020,
+      "banjir": 7,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 7
+    },
+    {
+      "kecamatan": "Babelan",
+      "tahun": 2021,
+      "banjir": 9,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 9
+    },
+    {
+      "kecamatan": "Babelan",
+      "tahun": 2024,
+      "banjir": 7,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 7
+    },
+    {
+      "kecamatan": "Babelan",
+      "tahun": 2025,
+      "banjir": 9,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 9
+    },
+    {
+      "kecamatan": "Tarumajaya",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Tarumajaya",
+      "tahun": 2020,
+      "banjir": 8,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 8
+    },
+    {
+      "kecamatan": "Tarumajaya",
+      "tahun": 2021,
+      "banjir": 7,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 7
+    },
+    {
+      "kecamatan": "Tarumajaya",
+      "tahun": 2024,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Tarumajaya",
+      "tahun": 2025,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Tambelang",
+      "tahun": 2019,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Tambelang",
+      "tahun": 2020,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Tambelang",
+      "tahun": 2021,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Tambelang",
+      "tahun": 2024,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Tambelang",
+      "tahun": 2025,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Sukawangi",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Sukawangi",
+      "tahun": 2020,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Sukawangi",
+      "tahun": 2021,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Sukawangi",
+      "tahun": 2024,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Sukawangi",
+      "tahun": 2025,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Sukatani",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Sukatani",
+      "tahun": 2020,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Sukatani",
+      "tahun": 2021,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Sukatani",
+      "tahun": 2024,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Sukatani",
+      "tahun": 2025,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Sukakarya",
+      "tahun": 2019,
+      "banjir": 0,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 0
+    },
+    {
+      "kecamatan": "Sukakarya",
+      "tahun": 2020,
+      "banjir": 2,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 2
+    },
+    {
+      "kecamatan": "Sukakarya",
+      "tahun": 2021,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Sukakarya",
+      "tahun": 2024,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Sukakarya",
+      "tahun": 2025,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Pebayuran",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Pebayuran",
+      "tahun": 2020,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 1,
+      "total": 6
+    },
+    {
+      "kecamatan": "Pebayuran",
+      "tahun": 2021,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Pebayuran",
+      "tahun": 2024,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Pebayuran",
+      "tahun": 2025,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cabangbungin",
+      "tahun": 2019,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cabangbungin",
+      "tahun": 2020,
+      "banjir": 5,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 5
+    },
+    {
+      "kecamatan": "Cabangbungin",
+      "tahun": 2021,
+      "banjir": 3,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 3
+    },
+    {
+      "kecamatan": "Cabangbungin",
+      "tahun": 2024,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Cabangbungin",
+      "tahun": 2025,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    },
+    {
+      "kecamatan": "Muara Gembong",
+      "tahun": 2019,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Muara Gembong",
+      "tahun": 2020,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Muara Gembong",
+      "tahun": 2021,
+      "banjir": 6,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 6
+    },
+    {
+      "kecamatan": "Muara Gembong",
+      "tahun": 2024,
+      "banjir": 4,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 4
+    },
+    {
+      "kecamatan": "Muara Gembong",
+      "tahun": 2025,
+      "banjir": 1,
+      "gempa": 0,
+      "longsor": 0,
+      "total": 1
+    }
+  ]
+}

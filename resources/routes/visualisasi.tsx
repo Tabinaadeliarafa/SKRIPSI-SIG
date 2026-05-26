@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PublicNavbar } from "@/components/PublicNavbar";
-import { KECAMATAN, totalDesa, getRisk, riskColor } from "@/data/bencana";
+import { KECAMATAN, totalDesa, getRisk, riskColor } from "@/data/Bencana";
 import { RiskChip } from "@/components/RiskChip";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart, Line } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
+import { TrenForecast } from "@/components/TrenForecast";
 
 export const Route = createFileRoute("/visualisasi")({
   head: () => ({ meta: [{ title: "Visualisasi — SIG Bencana Kabupaten Bekasi" }] }),
@@ -22,12 +23,6 @@ function VizPage() {
     { name: "Longsor", value: KECAMATAN.reduce((s, k) => s + k.longsor, 0), fill: "#c0522a" },
     { name: "Gempa", value: KECAMATAN.reduce((s, k) => s + k.gempa, 0) || 0.001, fill: "#4a8a5e" },
   ];
-  const trend = [2020, 2021, 2022, 2023, 2024, 2025].map((y, i) => ({
-    tahun: y,
-    banjir: 40 + i * 6 + (i === 5 ? 5 : 0),
-    longsor: 5 - Math.min(i, 3),
-    gempa: 0,
-  }));
 
   return (
     <div className="min-h-screen">
@@ -129,25 +124,7 @@ function VizPage() {
           </div>
         )}
 
-        {tab === "Tren" && (
-          <div className="premium-card p-5">
-            <h3 className="font-display font-bold text-navy mb-4">Tren Tahunan 2020 — 2025</h3>
-            <div className="h-[420px]">
-              <ResponsiveContainer>
-                <LineChart data={trend}>
-                  <CartesianGrid stroke="#e2dfd9" />
-                  <XAxis dataKey="tahun" tick={{ fontSize: 12, fill: "#1a3a5c" }} />
-                  <YAxis tick={{ fontSize: 11 }} />
-                  <Tooltip contentStyle={{ borderRadius: 12 }} />
-                  <Legend />
-                  <Line type="monotone" dataKey="banjir" stroke="#2d6ca8" strokeWidth={3} dot={{ r: 5 }} />
-                  <Line type="monotone" dataKey="longsor" stroke="#c0522a" strokeWidth={3} dot={{ r: 5 }} />
-                  <Line type="monotone" dataKey="gempa" stroke="#4a8a5e" strokeWidth={3} dot={{ r: 5 }} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        )}
+        {tab === "Tren" && <TrenForecast />}
       </div>
     </div>
   );

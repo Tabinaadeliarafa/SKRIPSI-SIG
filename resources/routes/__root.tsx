@@ -1,5 +1,7 @@
-import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
-import "../styles.css";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
+import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -19,6 +21,39 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  component: () => <Outlet />,
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "SIG Bencana Kabupaten Bekasi" },
+      { name: "description", content: "Sistem Informasi Geografis Bencana Kabupaten Bekasi — data BPS 2025." },
+    ],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" },
+    ],
+  }),
+  shellComponent: RootShell,
+  component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
+
+function RootComponent() {
+  const [client] = useState(() => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false, retry: 1 } } }));
+  return (
+    <QueryClientProvider client={client}>
+      <Outlet />
+    </QueryClientProvider>
+  );
+}
+
+function RootShell({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="id">
+      <head><HeadContent /></head>
+      <body>{children}<Scripts /></body>
+    </html>
+  );
+}

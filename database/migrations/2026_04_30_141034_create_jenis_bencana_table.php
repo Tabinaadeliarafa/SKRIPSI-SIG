@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('nama_jenis');        // "Banjir", "Tanah Longsor", dll
             $table->string('kode_jenis')->nullable();
-            $table->string('warna_peta')->nullable(); // hex color untuk peta
+            $table->string('warna_peta')->nullable();
             $table->timestamps();
         });
     }

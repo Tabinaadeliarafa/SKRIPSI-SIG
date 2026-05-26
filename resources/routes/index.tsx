@@ -5,7 +5,7 @@ import { PublicNavbar } from "@/components/PublicNavbar";
 import { StatCard } from "@/components/StatCard";
 import { RiskChip } from "@/components/RiskChip";
 import { BekasiMap } from "@/components/BekasiMap";
-import { KECAMATAN, TOTALS, getRisk, totalDesa, type KecamatanData } from "@/data/bencana";
+import { KECAMATAN, TOTALS, getRisk, totalDesa, type KecamatanData } from "@/data/Bencana";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [{ title: "Beranda — SIG Bencana Kabupaten Bekasi" }] }),

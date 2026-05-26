@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/AdminSidebar";
-import { AdminTopbar } from "@/components/AdminTopbar";
+import { AdminTopbar } from "@/components/AdminTopBar";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import { KECAMATAN } from "@/data/bencana";
+import { KECAMATAN } from "@/data/Bencana";
 import L from "leaflet";
 
 export const Route = createFileRoute("/admin/form")({

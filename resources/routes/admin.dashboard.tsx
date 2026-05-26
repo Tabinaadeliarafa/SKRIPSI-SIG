@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/AdminSidebar";
-import { AdminTopbar } from "@/components/AdminTopbar";
+import { AdminTopbar } from "@/components/AdminTopBar";
 import { StatCard } from "@/components/StatCard";
 import { RiskChip } from "@/components/RiskChip";
-import { KECAMATAN, TOTALS, totalDesa, getRisk } from "@/data/bencana";
+import { KECAMATAN, TOTALS, totalDesa, getRisk } from "@/data/Bencana";
 import { Building2, Droplets, Mountain, Activity, Plus, Upload, Download, Eye, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 

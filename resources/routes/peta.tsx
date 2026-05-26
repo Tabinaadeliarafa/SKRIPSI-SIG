@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PublicNavbar } from "@/components/PublicNavbar";
 import { BekasiMap } from "@/components/BekasiMap";
 import { RiskChip } from "@/components/RiskChip";
-import { KECAMATAN, getRisk, totalDesa, type KecamatanData } from "@/data/bencana";
+import { KECAMATAN, getRisk, totalDesa, type KecamatanData } from "@/data/Bencana";
 import { Layers, Search, Download, FileText, Map as MapIcon } from "lucide-react";
 
 export const Route = createFileRoute("/peta")({

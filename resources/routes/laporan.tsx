@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PublicNavbar } from "@/components/PublicNavbar";
-import { KECAMATAN, totalDesa, getRisk } from "@/data/bencana";
+import { KECAMATAN, totalDesa, getRisk } from "@/data/Bencana";
 import { RiskChip } from "@/components/RiskChip";
 import { Calendar, Download, Filter, Search, ChevronLeft, ChevronRight } from "lucide-react";
 

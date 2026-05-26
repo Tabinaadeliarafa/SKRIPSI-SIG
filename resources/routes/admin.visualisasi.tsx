@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/AdminSidebar";
-import { AdminTopbar } from "@/components/AdminTopbar";
-import { KECAMATAN, totalDesa } from "@/data/bencana";
+import { AdminTopbar } from "@/components/AdminTopBar";
+import { KECAMATAN, totalDesa } from "@/data/Bencana";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 import { Download, FileSpreadsheet, FileText, Settings2 } from "lucide-react";
 import { useState } from "react";
