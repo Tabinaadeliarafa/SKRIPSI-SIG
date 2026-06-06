@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\BencanaApiController;
 use App\Http\Controllers\Api\KecamatanApiController;
 use App\Http\Controllers\Api\BencanaController;
 use App\Http\Controllers\Api\KecamatanController;
+use App\Http\Controllers\Api\ForecastController;
 
 Route::get('/bencana',           [BencanaApiController::class, 'index']);
 Route::get('/bencana/geojson',   [BencanaApiController::class, 'geojson']);
@@ -13,6 +14,8 @@ Route::get('/jenis-bencana',     [BencanaApiController::class, 'jenisBencana']);
 Route::get('/kecamatan',         [KecamatanApiController::class, 'index']);
 Route::get('/kecamatan/geojson', [KecamatanApiController::class, 'geojson']);
 Route::get('/kecamatan/list',    [KecamatanApiController::class, 'indexApi']);
+Route::get('/forecast',          [ForecastController::class, 'forecast']);
+Route::get('/forecast-map',      [ForecastController::class, 'forecastMap']);
 
 Route::prefix('v1')->group(function () {
     // Bencana

@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { getKecamatanData, getForecast } from "@/services/api";
 
 import {
   KECAMATAN,
@@ -22,6 +23,27 @@ L.Icon.Default.mergeOptions({
     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
+// ─── Interface Forecast ───────────────────────────────────────────────────────
+interface ForecastMapData {
+  kecamatan_id: number;
+  nama_kecamatan: string;
+  forecast: number;
+  tahun_prediksi: number;
+}
+
+// ─── Helper Choropleth ────────────────────────────────────────────────────────
+function getForecastRisk(forecast: number) {
+  if (forecast >= 8) return "Tinggi";
+  if (forecast >= 4) return "Sedang";
+  return "Rendah";
+}
+
+function getForecastColor(forecast: number) {
+  if (forecast >= 8) return "#dc2626"; // merah
+  if (forecast >= 4) return "#f59e0b"; // oranye
+  return "#22c55e";                    // hijau
+}
+
 interface Props {
   height?: string;
   filter?: "all" | "banjir" | "longsor" | "gempa" | "kekeringan";
@@ -36,14 +58,32 @@ export function BekasiMap({
   selectedId,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-
   const mapRef = useRef<L.Map | null>(null);
 
-  const geoJsonRef = useRef<L.GeoJSON | null>(null);
+  const [kecamatanDb, setKecamatanDb] = useState<any[]>([]);
+  const [forecastDb, setForecastDb] = useState<any[]>([]);
 
+  const geoJsonRef = useRef<L.GeoJSON | null>(null);
   const markerLayerRef = useRef<L.LayerGroup | null>(null);
 
-  // INIT MAP
+  // ─── State forecast dengan tipe yang benar ──────────────────────────────────
+  const [forecastData, setForecastData] = useState<ForecastMapData[]>([]);
+
+  // ─── Fetch forecast dari /api/forecast-map ──────────────────────────────────
+  useEffect(() => {
+    async function loadForecast() {
+      try {
+        const response = await fetch("/api/forecast-map");
+        const data = await response.json();
+        setForecastData(data);
+      } catch (error) {
+        console.error("Gagal mengambil forecast map", error);
+      }
+    }
+    loadForecast();
+  }, []);
+
+  // ─── INIT MAP ───────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!ref.current || mapRef.current) return;
 
@@ -52,7 +92,6 @@ export function BekasiMap({
       attributionControl: false,
     }).setView([-6.23, 107.13], 10);
 
-    // BASEMAP
     L.tileLayer(
       "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
       {
@@ -63,20 +102,15 @@ export function BekasiMap({
 
     mapRef.current = map;
 
-    // LAYER GEOJSON
     geoJsonRef.current = L.geoJSON().addTo(map);
-
-    // LAYER MARKER
     markerLayerRef.current = L.layerGroup().addTo(map);
   }, []);
 
-  // LOAD GEOJSON + MARKER
+  // ─── LOAD GEOJSON + CHOROPLETH ──────────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
-
     if (!map) return;
 
-    // HAPUS GEOJSON LAMA
     if (geoJsonRef.current) {
       geoJsonRef.current.remove();
     }
@@ -86,15 +120,14 @@ export function BekasiMap({
       .then((geojson) => {
         const geoLayer = L.geoJSON(geojson, {
           style: (feature: any) => {
-            // GANTI PROPERTY SESUAI GEOJSON KAMU
             const namaKecamatan =
               feature.properties.WADMKC ||
               feature.properties.nama ||
               feature.properties.NAMOBJ;
 
-            const data = KECAMATAN.find(
-              (k) =>
-                k.nama.toLowerCase() ===
+            const data = forecastData.find(
+              (d) =>
+                d.nama_kecamatan.toLowerCase() ===
                 String(namaKecamatan).toLowerCase()
             );
 
@@ -107,37 +140,25 @@ export function BekasiMap({
               };
             }
 
-            const risk = getRisk(data);
+            return {
+              color: "#ffffff",
+              weight: 1.5,
+              fillColor: getForecastColor(data.forecast),
+              fillOpacity: 0.8,
+            };
 
-            // WARNA PER BENCANA
-            let fillColor = "#d1d5db";
+            const risk = getForecastRisk(data.forecast);
+            const fillColor = getForecastColor(data.forecast);
 
-            if (filter === "banjir") {
-              fillColor = "#2563eb";
-            } else if (filter === "longsor") {
-              fillColor = "#92400e";
-            } else if (filter === "gempa") {
-              fillColor = "#16a34a";
-            } else if (filter === "kekeringan") {
-              fillColor = "#eab308";
-            } else {
-              fillColor = riskColor(risk);
-            }
-
-            // OPACITY BERDASARKAN RISIKO
+            // Opacity berdasarkan risiko
             let opacity = 0.35;
-
-            if (risk === "Tinggi") {
-              opacity = 0.9;
-            } else if (risk === "Sedang") {
-              opacity = 0.7;
-            } else if (risk === "Rendah") {
-              opacity = 0.5;
-            }
+            if (risk === "Tinggi") opacity = 0.9;
+            else if (risk === "Sedang") opacity = 0.7;
+            else if (risk === "Rendah") opacity = 0.5;
 
             return {
               color: "#ffffff",
-              weight: selectedId === data.id ? 3 : 1.5,
+              weight: selectedId === data.kecamatan_id ? 3 : 1.5,
               fillColor,
               fillOpacity: opacity,
             };
@@ -149,50 +170,44 @@ export function BekasiMap({
               feature.properties.nama ||
               feature.properties.NAMOBJ;
 
-            const data = KECAMATAN.find(
-              (k) =>
-                k.nama.toLowerCase() ===
+            const data = forecastData.find(
+              (d) =>
+                d.nama_kecamatan.toLowerCase() ===
                 String(namaKecamatan).toLowerCase()
             );
 
             if (!data) return;
 
-            const risk = getRisk(data);
+            const risk = getForecastRisk(data.forecast);
 
             layer.bindPopup(`
-              <div style="font-family:sans-serif;min-width:200px">
+              <div style="font-family:sans-serif;min-width:220px">
                 <div style="font-weight:700;font-size:15px;margin-bottom:8px">
-                  ${data.nama}
+                  ${data.nama_kecamatan}
                 </div>
-
                 <div style="font-size:13px;line-height:1.6">
-                  <div><b>Banjir:</b> ${data.banjir}</div>
-                  <div><b>Longsor:</b> ${data.longsor}</div>
-                  <div><b>Gempa:</b> ${data.gempa}</div>
+                  <div><b>Forecast SMA:</b> ${data.forecast}</div>
                   <div><b>Risiko:</b> ${risk}</div>
-                  <div><b>Tahun:</b> 2025</div>
+                  <div><b>Tahun Prediksi:</b> ${data.tahun_prediksi}</div>
                 </div>
               </div>
             `);
 
             layer.on("click", () => {
-              onSelect?.(data);
+              // onSelect membutuhkan KecamatanData — sesuaikan jika sudah ada mapping-nya
+              // onSelect?.(data);
             });
           },
         });
 
         geoLayer.addTo(map);
-
         geoJsonRef.current = geoLayer;
 
-        // ==========================
-        // MARKER BULAT TETAP MUNCUL
-        // ==========================
-
+        // ─── Marker dummy dinonaktifkan sementara ─────────────────────────────
+        // Fokus saat ini: Choropleth dari Forecast SMA
+        /*
         const markerLayer = markerLayerRef.current;
-
         if (!markerLayer) return;
-
         markerLayer.clearLayers();
 
         KECAMATAN.forEach((k) => {
@@ -208,11 +223,8 @@ export function BekasiMap({
           if (filter !== "all" && value === 0) return;
 
           const risk = getRisk(k);
-
           const color = riskColor(risk);
-
           const radius = 8 + Math.min(value, 10) * 1.6;
-
           const isSelected = selectedId === k.id;
 
           const marker = L.circleMarker([k.lat, k.lng], {
@@ -228,18 +240,13 @@ export function BekasiMap({
               <div style="font-weight:700;font-size:14px;margin-bottom:6px">
                 ${k.nama}
               </div>
-
               <div style="display:grid;grid-template-columns:1fr auto;gap:4px;font-size:12px">
                 <span>Banjir</span><b>${k.banjir}</b>
                 <span>Longsor</span><b>${k.longsor}</b>
                 <span>Gempa</span><b>${k.gempa}</b>
               </div>
-
               <div style="margin-top:8px;padding-top:8px;border-top:1px solid #eee;font-size:11px">
-                Risiko:
-                <b style="color:${color}">
-                  ${risk}
-                </b>
+                Risiko: <b style="color:${color}">${risk}</b>
               </div>
             </div>
           `);
@@ -250,8 +257,28 @@ export function BekasiMap({
 
           marker.addTo(markerLayer);
         });
+        */
       });
-  }, [filter, selectedId, onSelect]);
+  }, [filter, selectedId, onSelect, forecastData]); // ← forecastData ditambahkan
+
+  // ─── Load data kecamatan & forecast dari API internal ──────────────────────
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const kecamatan = await getKecamatanData();
+        const forecast = await getForecast({
+          jenis_bencana: "Banjir",
+          tahun_awal: 2019,
+          tahun_akhir: 2025,
+        });
+        setKecamatanDb(kecamatan.data);
+        setForecastDb(forecast.historis);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    loadData();
+  }, []);
 
   return (
     <div

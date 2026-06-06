@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Bencana;
 use App\Models\Kecamatan;
-use App\Models\KejadianBencana; // === BARU ===
-use App\Models\JenisBencana;    // === BARU ===
-use Illuminate\Http\Request;    // === BARU ===
-use Illuminate\Http\JsonResponse; // === BARU ===
+use App\Models\KejadianBencana;
+use App\Models\JenisBencana;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 class BencanaApiController extends Controller

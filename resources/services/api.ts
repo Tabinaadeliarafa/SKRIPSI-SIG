@@ -18,3 +18,31 @@ api.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
+export async function getForecastData() {
+  const res = await api.get("/forecast");
+  return res.data;
+}
+
+export async function getKecamatanData() {
+  const res = await api.get("/kecamatan");
+  return res.data;
+}
+
+export async function getBencanaData() {
+  const res = await api.get("/bencana");
+  return res.data;
+}
+
+export async function getForecast(params: {
+  kecamatan_id?: number;
+  jenis_bencana?: string;
+  tahun_awal?: number;
+  tahun_akhir?: number;
+}) {
+  const res = await api.get("/forecast", {
+    params,
+  });
+
+  return res.data;
+}
