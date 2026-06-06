@@ -51,9 +51,10 @@ function RootComponent() {
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
-      <head><HeadContent /></head>
-      <body>{children}<Scripts /></body>
-    </html>
+    <div className="min-h-screen">
+      <HeadContent />
+      {children}
+      <Scripts />
+    </div>
   );
 }

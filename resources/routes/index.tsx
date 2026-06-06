@@ -181,7 +181,8 @@ function HomePage() {
                 ))}
                 <div className="pt-2 border-t border-border">
                   <div className="text-xs text-muted-foreground">Koordinat</div>
-                  <div className="font-mono text-xs text-foreground/80">{selected.lat.toFixed(3)}, {selected.lng.toFixed(3)}</div>
+                  <div className="font-mono text-xs text-foreground/80">
+                  {selected.lat != null ? selected.lat.toFixed(3) : "-"},{" "}{selected.lng != null ? selected.lng.toFixed(3) : "-"}</div>
                 </div>
               </div>
             )}

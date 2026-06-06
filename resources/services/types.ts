@@ -47,4 +47,4 @@ export interface DashboardStats {
   per_tahun: { tahun: number; total: number }[];
 }
 
-export type DisasterFilter = "all" | "banjir" | "longsor" | "gempa";
+export type DisasterFilter = "all" | "banjir" | "longsor" | "gempa" | "kekeringan";
