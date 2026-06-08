@@ -15,9 +15,13 @@ import { Route as LaporanRouteImport } from './routes/laporan'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminVisualisasiRouteImport } from './routes/admin.visualisasi'
+import { Route as AdminPetaRouteImport } from './routes/admin.peta'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminFormRouteImport } from './routes/admin.form'
+import { Route as AdminExportRouteImport } from './routes/admin.export'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminBencanaRouteImport } from './routes/admin.bencana'
+import { Route as AdminAnalisisRouteImport } from './routes/admin.analisis'
 
 const VisualisasiRoute = VisualisasiRouteImport.update({
   id: '/visualisasi',
@@ -49,6 +53,11 @@ const AdminVisualisasiRoute = AdminVisualisasiRouteImport.update({
   path: '/admin/visualisasi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPetaRoute = AdminPetaRouteImport.update({
+  id: '/admin/peta',
+  path: '/admin/peta',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -59,9 +68,24 @@ const AdminFormRoute = AdminFormRouteImport.update({
   path: '/admin/form',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminExportRoute = AdminExportRouteImport.update({
+  id: '/admin/export',
+  path: '/admin/export',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/admin/dashboard',
   path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBencanaRoute = AdminBencanaRouteImport.update({
+  id: '/admin/bencana',
+  path: '/admin/bencana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAnalisisRoute = AdminAnalisisRouteImport.update({
+  id: '/admin/analisis',
+  path: '/admin/analisis',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -71,9 +95,13 @@ export interface FileRoutesByFullPath {
   '/laporan': typeof LaporanRoute
   '/peta': typeof PetaRoute
   '/visualisasi': typeof VisualisasiRoute
+  '/admin/analisis': typeof AdminAnalisisRoute
+  '/admin/bencana': typeof AdminBencanaRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/export': typeof AdminExportRoute
   '/admin/form': typeof AdminFormRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/peta': typeof AdminPetaRoute
   '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
 export interface FileRoutesByTo {
@@ -82,9 +110,13 @@ export interface FileRoutesByTo {
   '/laporan': typeof LaporanRoute
   '/peta': typeof PetaRoute
   '/visualisasi': typeof VisualisasiRoute
+  '/admin/analisis': typeof AdminAnalisisRoute
+  '/admin/bencana': typeof AdminBencanaRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/export': typeof AdminExportRoute
   '/admin/form': typeof AdminFormRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/peta': typeof AdminPetaRoute
   '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
 export interface FileRoutesById {
@@ -94,9 +126,13 @@ export interface FileRoutesById {
   '/laporan': typeof LaporanRoute
   '/peta': typeof PetaRoute
   '/visualisasi': typeof VisualisasiRoute
+  '/admin/analisis': typeof AdminAnalisisRoute
+  '/admin/bencana': typeof AdminBencanaRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/export': typeof AdminExportRoute
   '/admin/form': typeof AdminFormRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/peta': typeof AdminPetaRoute
   '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
 export interface FileRouteTypes {
@@ -107,9 +143,13 @@ export interface FileRouteTypes {
     | '/laporan'
     | '/peta'
     | '/visualisasi'
+    | '/admin/analisis'
+    | '/admin/bencana'
     | '/admin/dashboard'
+    | '/admin/export'
     | '/admin/form'
     | '/admin/login'
+    | '/admin/peta'
     | '/admin/visualisasi'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -118,9 +158,13 @@ export interface FileRouteTypes {
     | '/laporan'
     | '/peta'
     | '/visualisasi'
+    | '/admin/analisis'
+    | '/admin/bencana'
     | '/admin/dashboard'
+    | '/admin/export'
     | '/admin/form'
     | '/admin/login'
+    | '/admin/peta'
     | '/admin/visualisasi'
   id:
     | '__root__'
@@ -129,9 +173,13 @@ export interface FileRouteTypes {
     | '/laporan'
     | '/peta'
     | '/visualisasi'
+    | '/admin/analisis'
+    | '/admin/bencana'
     | '/admin/dashboard'
+    | '/admin/export'
     | '/admin/form'
     | '/admin/login'
+    | '/admin/peta'
     | '/admin/visualisasi'
   fileRoutesById: FileRoutesById
 }
@@ -141,9 +189,13 @@ export interface RootRouteChildren {
   LaporanRoute: typeof LaporanRoute
   PetaRoute: typeof PetaRoute
   VisualisasiRoute: typeof VisualisasiRoute
+  AdminAnalisisRoute: typeof AdminAnalisisRoute
+  AdminBencanaRoute: typeof AdminBencanaRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminExportRoute: typeof AdminExportRoute
   AdminFormRoute: typeof AdminFormRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminPetaRoute: typeof AdminPetaRoute
   AdminVisualisasiRoute: typeof AdminVisualisasiRoute
 }
 
@@ -191,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminVisualisasiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/peta': {
+      id: '/admin/peta'
+      path: '/admin/peta'
+      fullPath: '/admin/peta'
+      preLoaderRoute: typeof AdminPetaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -205,11 +264,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminFormRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/export': {
+      id: '/admin/export'
+      path: '/admin/export'
+      fullPath: '/admin/export'
+      preLoaderRoute: typeof AdminExportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/dashboard': {
       id: '/admin/dashboard'
       path: '/admin/dashboard'
       fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/bencana': {
+      id: '/admin/bencana'
+      path: '/admin/bencana'
+      fullPath: '/admin/bencana'
+      preLoaderRoute: typeof AdminBencanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/analisis': {
+      id: '/admin/analisis'
+      path: '/admin/analisis'
+      fullPath: '/admin/analisis'
+      preLoaderRoute: typeof AdminAnalisisRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -221,9 +301,13 @@ const rootRouteChildren: RootRouteChildren = {
   LaporanRoute: LaporanRoute,
   PetaRoute: PetaRoute,
   VisualisasiRoute: VisualisasiRoute,
+  AdminAnalisisRoute: AdminAnalisisRoute,
+  AdminBencanaRoute: AdminBencanaRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminExportRoute: AdminExportRoute,
   AdminFormRoute: AdminFormRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminPetaRoute: AdminPetaRoute,
   AdminVisualisasiRoute: AdminVisualisasiRoute,
 }
 export const routeTree = rootRouteImport

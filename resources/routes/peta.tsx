@@ -34,6 +34,294 @@ const FILTER_TO_JENIS: Record<DisasterFilter, string> = {
   kekeringan: "Kekeringan",
 };
 
+// ─── Download helpers ─────────────────────────────────────────────────────────
+
+function downloadCSV(
+  list: ForecastMapData[],
+  filter: DisasterFilter,
+  selected?: ForecastMapData | null
+) {
+  const jenis = FILTER_TO_JENIS[filter];
+
+  const exportData = selected ? [selected] : list;
+
+  const headers = [
+    "No",
+    "Kecamatan",
+    `Forecast SMA (${jenis})`,
+    "Risiko",
+    "Tahun Prediksi",
+  ];
+
+  const rows = exportData.map((k, i) => {
+    const v = Number(k.forecast ?? 0);
+
+    const risk =
+      v >= 8
+        ? "Tinggi"
+        : v >= 4
+        ? "Sedang"
+        : "Rendah";
+
+    return [
+      i + 1,
+      k.nama_kecamatan,
+      v.toFixed(2),
+      risk,
+      k.tahun_prediksi ?? "-",
+    ];
+  });
+
+  const csv = [headers, ...rows]
+    .map((r) => r.join(","))
+    .join("\n");
+
+  const blob = new Blob([csv], {
+    type: "text/csv;charset=utf-8;",
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+
+  a.download = selected
+    ? `detail-${selected.nama_kecamatan}-${jenis}.csv`
+    : `peta-bencana-${jenis.toLowerCase()}-bekasi.csv`;
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function downloadPDF(
+  list: ForecastMapData[],
+  filter: DisasterFilter,
+  selected?: ForecastMapData | null
+) {
+  const jenis = FILTER_TO_JENIS[filter];
+
+  const exportData = selected ? [selected] : list;
+
+  const totalTinggi = list.filter(
+    (k) => getForecastRisk(k.forecast) === "Tinggi"
+  ).length;
+
+  const totalSedang = list.filter(
+    (k) => getForecastRisk(k.forecast) === "Sedang"
+  ).length;
+
+  const totalRendah = list.filter(
+    (k) => getForecastRisk(k.forecast) === "Rendah"
+  ).length;
+
+  const tableRows = exportData
+    .map((k, i) => {
+      const v = Number(k.forecast ?? 0);
+
+      const risk =
+        v >= 8
+          ? "Tinggi"
+          : v >= 4
+          ? "Sedang"
+          : "Rendah";
+
+      const color =
+        v >= 8
+          ? "#dc2626"
+          : v >= 4
+          ? "#d97706"
+          : "#16a34a";
+
+      return `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${k.nama_kecamatan}</td>
+          <td style="font-weight:bold">${v.toFixed(2)}</td>
+          <td style="color:${color};font-weight:bold">${risk}</td>
+          <td>${k.tahun_prediksi ?? "-"}</td>
+        </tr>
+      `;
+    })
+    .join("");
+
+  const html = `
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<title>Laporan SIG Bencana Bekasi</title>
+
+<style>
+body{
+  font-family:Arial,sans-serif;
+  padding:30px;
+  color:#1a3a5c;
+}
+
+h1{
+  margin-bottom:6px;
+}
+
+.subtitle{
+  color:#64748b;
+  margin-bottom:20px;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.box{
+  background:#f1f5f9;
+  border-radius:8px;
+  padding:10px 14px;
+}
+
+.box small{
+  display:block;
+  color:#64748b;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  background:#1a3a5c;
+  color:white;
+  padding:10px;
+}
+
+td{
+  padding:8px;
+  border-bottom:1px solid #e2e8f0;
+}
+
+.footer{
+  margin-top:20px;
+  font-size:11px;
+  color:#64748b;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Laporan SIG Bencana Kabupaten Bekasi</h1>
+<div class="subtitle">
+Jenis Bencana: ${jenis}
+</div>
+
+<div class="meta">
+
+<div class="box">
+<small>Jenis Bencana</small>
+<b>${jenis}</b>
+</div>
+
+<div class="box">
+<small>Jumlah Data</small>
+<b>${exportData.length}</b>
+</div>
+
+<div class="box">
+<small>Metode</small>
+<b>Simple Moving Average</b>
+</div>
+
+<div class="box">
+<small>Tanggal Cetak</small>
+<b>${new Date().toLocaleDateString("id-ID")}</b>
+</div>
+
+${
+  selected
+    ? `
+<div class="box">
+<small>Wilayah Dipilih</small>
+<b>${selected.nama_kecamatan}</b>
+</div>
+
+<div class="box">
+<small>Risiko</small>
+<b>${getForecastRisk(selected.forecast)}</b>
+</div>
+
+<div class="box">
+<small>Forecast SMA</small>
+<b>${safeVal(selected.forecast).toFixed(2)}</b>
+</div>
+`
+    : `
+<div class="box">
+<small>Risiko Tinggi</small>
+<b>${totalTinggi}</b>
+</div>
+
+<div class="box">
+<small>Risiko Sedang</small>
+<b>${totalSedang}</b>
+</div>
+
+<div class="box">
+<small>Risiko Rendah</small>
+<b>${totalRendah}</b>
+</div>
+`
+}
+
+</div>
+
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Kecamatan</th>
+<th>Forecast SMA</th>
+<th>Risiko</th>
+<th>Tahun Prediksi</th>
+</tr>
+</thead>
+
+<tbody>
+${tableRows}
+</tbody>
+</table>
+
+<div class="footer">
+Dicetak dari SIG BKS Kabupaten Bekasi
+</div>
+
+<script>
+window.onload = () => window.print();
+<\/script>
+
+</body>
+</html>
+`;
+
+  const win = window.open(
+    "",
+    "_blank",
+    "width=1000,height=800"
+  );
+
+  if (!win) {
+    alert(
+      "Pop-up diblokir browser. Izinkan pop-up terlebih dahulu."
+    );
+    return;
+  }
+
+  win.document.write(html);
+  win.document.close();
+}
+
 // ─── Helper: nilai forecast yang aman ─────────────────────────────────────────
 function safeVal(forecast: unknown): number {
   const n = Number(forecast);
@@ -261,13 +549,41 @@ function MapPage() {
 
           {/* Tombol export */}
           <div className="premium-card p-5 space-y-2">
-            <button className="w-full flex items-center justify-between rounded-lg bg-milk-dark/60 hover:bg-milk-dark px-3 py-2 text-sm font-medium">
-              <span>Export CSV</span>
-              <Download className="h-4 w-4" />
+            <h4 className="font-semibold text-navy mb-1">Unduh Data</h4>
+            <p className="text-xs text-muted-foreground mb-3">
+              {kecamatanList.length} kecamatan · {FILTER_TO_JENIS[filter]}
+            </p>
+            <button
+              onClick={() =>
+              downloadCSV(
+                kecamatanList,
+                filter,
+                selected
+              )
+            }
+              disabled={kecamatanList.length === 0}
+              className="w-full flex items-center justify-between rounded-xl bg-milk-dark/60 hover:bg-milk-dark px-3 py-2.5 text-sm font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <span className="flex items-center gap-2">
+                <Download className="h-4 w-4 text-sky" /> Export CSV
+              </span>
+              <span className="text-[10px] text-muted-foreground">Spreadsheet</span>
             </button>
-            <button className="w-full flex items-center justify-between rounded-lg bg-navy text-white px-3 py-2 text-sm font-medium hover:bg-navy-deep">
-              <span>Export PDF</span>
-              <FileText className="h-4 w-4" />
+            <button
+              onClick={() =>
+              downloadPDF(
+                kecamatanList,
+                filter,
+                selected
+              )
+            }
+              disabled={kecamatanList.length === 0}
+              className="w-full flex items-center justify-between rounded-xl bg-navy text-white hover:bg-navy-deep px-3 py-2.5 text-sm font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <span className="flex items-center gap-2">
+                <FileText className="h-4 w-4" /> Export PDF
+              </span>
+              <span className="text-[10px] text-white/60">Siap cetak</span>
             </button>
           </div>
         </aside>
