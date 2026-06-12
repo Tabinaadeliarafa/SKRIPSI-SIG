@@ -9,38 +9,23 @@ import { StatsCard } from "@/components/StatsCard";
 import { useRingkasan, useDashboardStats } from "@/hooks/use-Bencana";
 import type { DisasterFilter, RingkasanKecamatan } from "@/services/types";
 import { Building2, Droplets, Mountain, Activity, AlertCircle } from "lucide-react";
-import { KECAMATAN, getRisk, totalDesa } from "@/data/Bencana";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard SIG — SIG Bencana Kabupaten Bekasi" }] }),
   component: DashboardPage,
 });
 
-// fallback dari mock saat API belum tersedia
-function mockRingkasan(): RingkasanKecamatan[] {
-  return KECAMATAN.map((k) => ({
-    kecamatan_id: k.id,
-    nama_kecamatan: k.nama,
-    banjir: k.banjir,
-    longsor: k.longsor,
-    gempa: k.gempa,
-    total: totalDesa(k),
-    risiko: getRisk(k) as RingkasanKecamatan["risiko"],
-  }));
-}
-
 function DashboardPage() {
   const [filter, setFilter] = useState<DisasterFilter>("all");
   const [tahun, setTahun] = useState<number>(2025);
   const [selectedNama, setSelectedNama] = useState<string | null>(null);
 
-  const { data: ringkasanApi, isError: ringkasanErr, isLoading } = useRingkasan(tahun);
+  // Mengambil data dari API melalui hooks React Query
+  const { data: ringkasanApi = [], isError: ringkasanErr, isLoading } = useRingkasan(tahun);
   const { data: statsApi, isError: statsErr } = useDashboardStats();
 
-  const ringkasan = useMemo<RingkasanKecamatan[]>(() => {
-    if (ringkasanApi && ringkasanApi.length) return ringkasanApi;
-    return mockRingkasan();
-  }, [ringkasanApi]);
+  // Data ringkasan sekarang murni dari API
+  const ringkasan = useMemo(() => ringkasanApi, [ringkasanApi]);
 
   const filtered = useMemo(() => {
     if (filter === "all") return ringkasan;
@@ -55,13 +40,13 @@ function DashboardPage() {
     [ringkasan]
   );
 
+  // Jika statsApi belum ada, tampilkan 0 atau loading state
   const stats = statsApi ?? {
     total_kecamatan: ringkasan.length,
-    total_kejadian: ringkasan.reduce((s, r) => s + r.total, 0),
-    total_banjir: ringkasan.reduce((s, r) => s + r.banjir, 0),
-    total_longsor: ringkasan.reduce((s, r) => s + r.longsor, 0),
-    total_gempa: ringkasan.reduce((s, r) => s + r.gempa, 0),
-    per_tahun: [],
+    total_kejadian: ringkasan.reduce((s, r) => s + (r.total || 0), 0),
+    total_banjir: ringkasan.reduce((s, r) => s + (r.banjir || 0), 0),
+    total_longsor: ringkasan.reduce((s, r) => s + (r.longsor || 0), 0),
+    total_gempa: ringkasan.reduce((s, r) => s + (r.gempa || 0), 0),
   };
 
   const selected = useMemo(
@@ -69,19 +54,18 @@ function DashboardPage() {
     [selectedNama, ringkasan]
   );
 
-  const offline = ringkasanErr && statsErr;
+  const isOffline = ringkasanErr || statsErr;
 
   return (
     <div className="min-h-screen flex flex-col">
       <PublicNavbar />
       <main className="flex-1 p-3 lg:p-5 space-y-4">
-        {offline && (
+        {isOffline && (
           <div className="premium-card p-3 flex items-start gap-3 border-l-4 border-orange">
             <AlertCircle className="h-5 w-5 text-orange mt-0.5" />
             <div className="text-sm">
-              <b className="text-navy">Mode demo aktif.</b> API Laravel belum dapat dijangkau di{" "}
-              <code className="px-1 rounded bg-milk-dark/60">{import.meta.env.VITE_API_BASE_URL ?? "/api"}</code>.
-              Set <code>VITE_API_BASE_URL</code> ke URL Laravel Anda untuk data realtime.
+              <b className="text-navy">Peringatan:</b> Gagal memuat data dari server.
+              Pastikan API Laravel berjalan di <code className="px-1 rounded bg-milk-dark/60">{import.meta.env.VITE_API_BASE_URL ?? "/api"}</code>.
             </div>
           </div>
         )}

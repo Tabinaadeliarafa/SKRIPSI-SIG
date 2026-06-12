@@ -11,7 +11,6 @@ export interface JenisBencana {
 export interface Kecamatan {
   id: number;
   nama_kecamatan: string;
-  // geom dikirim sebagai GeoJSON dari Laravel (ST_AsGeoJSON)
   geom?: GeoJSON.Polygon | GeoJSON.MultiPolygon | null;
 }
 

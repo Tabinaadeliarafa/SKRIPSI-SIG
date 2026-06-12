@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/AdminSidebar";
 import { AdminTopbar } from "@/components/AdminTopBar";
-import { KECAMATAN, totalDesa, getRisk } from "@/data/Bencana";
+import { getRisk, totalDesa, KECAMATAN } from "@/data/Bencana";
 import { Download, FileText, FileSpreadsheet, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 

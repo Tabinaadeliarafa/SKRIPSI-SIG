@@ -20,8 +20,8 @@ export function PublicNavbar() {
             <MapIcon className="h-4.5 w-4.5" strokeWidth={2.5} />
           </div>
           <div className="leading-tight">
-            <div className="font-display font-bold text-navy tracking-tight">SIG BKS</div>
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Bencana Bekasi</div>
+            <div className="font-display font-bold text-navy tracking-tight">SIG KAB.BEKASI</div>
+            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Bencana Kabupaten Bekasi</div>
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-1">

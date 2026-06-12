@@ -16,6 +16,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminVisualisasiRouteImport } from './routes/admin.visualisasi'
 import { Route as AdminPetaRouteImport } from './routes/admin.peta'
+import { Route as AdminPengaturanRouteImport } from './routes/admin.pengaturan'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminFormRouteImport } from './routes/admin.form'
 import { Route as AdminExportRouteImport } from './routes/admin.export'
@@ -56,6 +57,11 @@ const AdminVisualisasiRoute = AdminVisualisasiRouteImport.update({
 const AdminPetaRoute = AdminPetaRouteImport.update({
   id: '/admin/peta',
   path: '/admin/peta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPengaturanRoute = AdminPengaturanRouteImport.update({
+  id: '/admin/pengaturan',
+  path: '/admin/pengaturan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/admin/export': typeof AdminExportRoute
   '/admin/form': typeof AdminFormRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/pengaturan': typeof AdminPengaturanRoute
   '/admin/peta': typeof AdminPetaRoute
   '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/admin/export': typeof AdminExportRoute
   '/admin/form': typeof AdminFormRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/pengaturan': typeof AdminPengaturanRoute
   '/admin/peta': typeof AdminPetaRoute
   '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/admin/export': typeof AdminExportRoute
   '/admin/form': typeof AdminFormRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/pengaturan': typeof AdminPengaturanRoute
   '/admin/peta': typeof AdminPetaRoute
   '/admin/visualisasi': typeof AdminVisualisasiRoute
 }
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/admin/export'
     | '/admin/form'
     | '/admin/login'
+    | '/admin/pengaturan'
     | '/admin/peta'
     | '/admin/visualisasi'
   fileRoutesByTo: FileRoutesByTo
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/admin/export'
     | '/admin/form'
     | '/admin/login'
+    | '/admin/pengaturan'
     | '/admin/peta'
     | '/admin/visualisasi'
   id:
@@ -179,6 +190,7 @@ export interface FileRouteTypes {
     | '/admin/export'
     | '/admin/form'
     | '/admin/login'
+    | '/admin/pengaturan'
     | '/admin/peta'
     | '/admin/visualisasi'
   fileRoutesById: FileRoutesById
@@ -195,6 +207,7 @@ export interface RootRouteChildren {
   AdminExportRoute: typeof AdminExportRoute
   AdminFormRoute: typeof AdminFormRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminPengaturanRoute: typeof AdminPengaturanRoute
   AdminPetaRoute: typeof AdminPetaRoute
   AdminVisualisasiRoute: typeof AdminVisualisasiRoute
 }
@@ -248,6 +261,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/peta'
       fullPath: '/admin/peta'
       preLoaderRoute: typeof AdminPetaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/pengaturan': {
+      id: '/admin/pengaturan'
+      path: '/admin/pengaturan'
+      fullPath: '/admin/pengaturan'
+      preLoaderRoute: typeof AdminPengaturanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/login': {
@@ -307,6 +327,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminExportRoute: AdminExportRoute,
   AdminFormRoute: AdminFormRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminPengaturanRoute: AdminPengaturanRoute,
   AdminPetaRoute: AdminPetaRoute,
   AdminVisualisasiRoute: AdminVisualisasiRoute,
 }

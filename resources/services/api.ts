@@ -34,6 +34,11 @@ export async function getBencanaData() {
   return res.data;
 }
 
+export const fetchKecamatanData = async () => {
+  const response = await api.get('/kecamatan-stats');
+  return response.data;
+};
+
 export async function getForecast(params: {
   kecamatan_id?: number;
   jenis_bencana?: string;

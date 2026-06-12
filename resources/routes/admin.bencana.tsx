@@ -1,8 +1,3 @@
-/**
- * /admin/bencana
- * Manajemen Data Bencana lengkap: stats + filter per jenis + tabel + tambah/edit/hapus.
- * Tombol Export CSV & PDF berfungsi.
- */
 import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/AdminSidebar";
 import { AdminTopbar } from "@/components/AdminTopBar";
@@ -13,7 +8,8 @@ import {
   Building2, Droplets, Mountain, Activity,
   Plus, Upload, Download, Eye, Pencil, Trash2, FileText, Search,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
+import axios from "axios";
 
 export const Route = createFileRoute("/admin/bencana")({
   head: () => ({ meta: [{ title: "Data Bencana — SIG BKS" }] }),
@@ -100,6 +96,9 @@ function DataBencanaPage() {
   const [q,       setQ      ] = useState("");
   const [confirm, setConfirm] = useState<string | null>(null);
 
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
   const rows = useMemo(() => {
     let list = [...KECAMATAN];
     if (q) list = list.filter((k) => k.nama.toLowerCase().includes(q.toLowerCase()));
@@ -111,6 +110,54 @@ function DataBencanaPage() {
     : jenis === "banjir"  ? "Data Banjir"
     : jenis === "longsor" ? "Data Longsor"
     : "Data Gempa";
+
+    const handleImport = async (
+      e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      const file = e.target.files?.[0];
+
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        setUploading(true);
+
+        const response = await axios.post(
+          "/api/bencana/import",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        alert(
+          `Import berhasil (${response.data.jumlah_import ?? 0} data)`
+        );
+
+        window.location.reload();
+
+      } catch (error: any) {
+
+        console.error(error);
+
+        alert(
+          error?.response?.data?.message ??
+          "Import gagal"
+        );
+
+      } finally {
+
+        setUploading(false);
+
+        if (fileRef.current) {
+          fileRef.current.value = "";
+        }
+      }
+    };
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -127,6 +174,14 @@ function DataBencanaPage() {
                 Sumber: BPS Kabupaten Bekasi 2025 · {KECAMATAN.length} kecamatan
               </p>
             </div>
+
+            <input
+              ref={fileRef}
+              type="file"
+              accept=".csv"
+              className="hidden"
+              onChange={handleImport}
+            />
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => downloadCSV(buildCSV(rows, jenis), `data-${jenis}-bekasi.csv`)}
@@ -140,8 +195,16 @@ function DataBencanaPage() {
               >
                 <FileText className="h-4 w-4 text-orange" /> Export PDF
               </button>
-              <button className="inline-flex items-center gap-2 rounded-full bg-white border border-border px-4 py-2 text-sm font-semibold text-navy hover:bg-milk-dark transition">
-                <Upload className="h-4 w-4" /> Import BPS
+              <button
+                onClick={() => fileRef.current?.click()}
+                disabled={uploading}
+                className="inline-flex items-center gap-2 rounded-full bg-white border border-border px-4 py-2 text-sm font-semibold text-navy hover:bg-milk-dark transition disabled:opacity-50"
+              >
+                <Upload className="h-4 w-4" />
+
+                {uploading
+                  ? "Mengunggah..."
+                  : "Import BPS"}
               </button>
               <Link
                 to="/admin/form"

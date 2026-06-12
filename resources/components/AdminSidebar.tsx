@@ -41,7 +41,6 @@ export function AdminSidebar() {
     path === to || (to !== "/admin/dashboard" && path.startsWith(to));
 
   return (
-    // Diperlebar: w-72 (288px) dari sebelumnya w-64 (256px)
     <aside className="hidden lg:flex flex-col w-72 bg-navy-deep text-white shrink-0 sticky top-0 h-screen">
 
       {/* Logo */}
@@ -59,7 +58,6 @@ export function AdminSidebar() {
       <nav className="flex-1 overflow-y-auto px-4 py-5 space-y-6">
         {groups.map((g) => (
           <div key={g.label}>
-            {/* Label grup — lebih besar */}
             <div className="px-3 mb-2 text-[11px] uppercase tracking-widest text-white/40 font-bold">
               {g.label}
             </div>
@@ -87,11 +85,15 @@ export function AdminSidebar() {
         ))}
       </nav>
 
-      {/* Footer */}
+      {/* Footer — Pengaturan mengarah ke /admin/pengaturan */}
       <div className="px-4 py-4 border-t border-white/10">
         <Link
-          to="/admin/dashboard"
-          className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium text-white/70 hover:bg-white/8 hover:text-white transition"
+          to="/admin/pengaturan"
+          className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium transition ${
+            isActive("/admin/pengaturan")
+              ? "bg-orange text-white shadow-md"
+              : "text-white/70 hover:bg-white/8 hover:text-white"
+          }`}
         >
           <Settings className="h-[18px] w-[18px]" />
           Pengaturan

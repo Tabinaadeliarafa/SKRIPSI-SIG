@@ -21,6 +21,7 @@ import {
   smaForecast,
   type JenisBencana,
 } from "@/services/historis";
+import { api } from "@/services/api";
 
 const JENIS_LABEL: Record<JenisBencana, string> = {
   banjir: "Banjir",
@@ -38,8 +39,11 @@ const JENIS_COLOR: Record<JenisBencana, string> = {
 export function TrenForecast() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["historis-bencana"],
-    queryFn: loadHistoris,
-    staleTime: Infinity,
+    queryFn: async () => {
+      const res = await api.get("/statistik-bencana");
+      return res.data;
+    },
+    staleTime: 5 * 60 * 1000,
   });
 
   const [jenis, setJenis] = useState<JenisBencana>("banjir");

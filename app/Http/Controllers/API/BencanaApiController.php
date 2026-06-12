@@ -10,6 +10,8 @@ use App\Models\JenisBencana;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use App\Imports\BencanaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BencanaApiController extends Controller
 {
@@ -103,6 +105,47 @@ class BencanaApiController extends Controller
         return response()->json([
             'status' => 'success',
             'data'   => JenisBencana::all(['id', 'nama_jenis', 'kode_jenis', 'warna_peta']),
+        ]);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt'
+        ]);
+
+        $file = fopen(
+            $request->file('file')->getRealPath(),
+            'r'
+        );
+
+        // Skip header
+        fgetcsv($file);
+
+        $jumlahImport = 0;
+
+        while (($row = fgetcsv($file, 1000, ",")) !== false) {
+
+            if (count($row) < 5) {
+                continue;
+            }
+
+            KejadianBencana::create([
+                'kecamatan_id' => (int)$row[0],
+                'jenis_bencana_id' => (int)$row[1],
+                'jumlah_desa_terdampak' => (int)$row[2],
+                'tahun' => (int)$row[3],
+                'keterangan' => $row[4],
+            ]);
+
+            $jumlahImport++;
+        }
+
+        fclose($file);
+
+        return response()->json([
+            'success' => true,
+            'jumlah_import' => $jumlahImport
         ]);
     }
 }

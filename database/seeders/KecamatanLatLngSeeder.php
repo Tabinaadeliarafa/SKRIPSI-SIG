@@ -5,10 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Seeder untuk mengisi data latitude & longitude 23 kecamatan Kabupaten Bekasi.
- * Jalankan dengan: php artisan db:seed --class=KecamatanLatLngSeeder
- */
 class KecamatanLatLngSeeder extends Seeder
 {
     public function run(): void

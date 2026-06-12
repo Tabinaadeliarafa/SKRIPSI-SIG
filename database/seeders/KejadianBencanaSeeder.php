@@ -1,17 +1,18 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\Kecamatan;
 use App\Models\JenisBencana;
 use App\Models\KejadianBencana;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class KejadianBencanaSeeder extends Seeder
 {
     public function run(): void
     {
-        // Data dari BPS 2025 — sesuai file CSV Anda
-        // Format: ['kecamatan' => nama, 'banjir' => n, 'longsor' => n, 'gempa' => n]
         $dataBPS = [
             ['kecamatan' => 'Setu',             'banjir' => 4, 'longsor' => 0, 'gempa' => 0],
             ['kecamatan' => 'Serang Baru',       'banjir' => 3, 'longsor' => 0, 'gempa' => 0],
@@ -38,33 +39,25 @@ class KejadianBencanaSeeder extends Seeder
             ['kecamatan' => 'Muara Gembong',     'banjir' => 1, 'longsor' => 0, 'gempa' => 0],
         ];
 
+        $path = public_path('geo/kecamatan.geojson');
+        $geoData = File::exists($path) ? json_decode(File::get($path), true)['features'] : [];
+
         $banjirId  = JenisBencana::where('kode_jenis', 'BNJ')->first()->id;
         $longsorId = JenisBencana::where('kode_jenis', 'TLS')->first()->id;
         $gempaId   = JenisBencana::where('kode_jenis', 'GMB')->first()->id;
 
         foreach ($dataBPS as $row) {
-            $kecamatan = Kecamatan::firstOrCreate(
-                ['nama_kecamatan' => $row['kecamatan']]
+            $geoFeature = collect($geoData)->firstWhere('properties.NAME_3', $row['kecamatan']);
+            $geometry = $geoFeature ? json_encode($geoFeature['geometry']) : null;
+
+            $kecamatan = Kecamatan::updateOrCreate(
+                ['nama_kecamatan' => $row['kecamatan']],
+                [
+                    'geom' => $geometry ? DB::raw("ST_GeomFromGeoJSON('$geometry')") : null,
+                    'latitude' => $geometry ? DB::raw("ST_Y(ST_Centroid(ST_GeomFromGeoJSON('$geometry')))") : null,
+                    'longitude' => $geometry ? DB::raw("ST_X(ST_Centroid(ST_GeomFromGeoJSON('$geometry')))") : null,
+                ]
             );
-
-            $jenisMap = [
-                'banjir'  => [$banjirId,  $row['banjir']],
-                'longsor' => [$longsorId, $row['longsor']],
-                'gempa'   => [$gempaId,   $row['gempa']],
-            ];
-
-            foreach ($jenisMap as [$jenisId, $jumlah]) {
-                if ($jumlah > 0) {
-                    KejadianBencana::updateOrCreate(
-                        [
-                            'kecamatan_id'    => $kecamatan->id,
-                            'jenis_bencana_id' => $jenisId,
-                            'tahun'           => 2025,
-                        ],
-                        ['jumlah_desa_terdampak' => $jumlah]
-                    );
-                }
-            }
         }
     }
 }
